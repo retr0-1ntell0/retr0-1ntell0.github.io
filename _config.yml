@@ -5,7 +5,7 @@ theme: jekyll-theme-chirpy
 
 # Change the following value to '/PROJECT_NAME' ONLY IF your site type is GitHub Pages Project sites
 # and doesn't have a custom domain.
-baseurl: ''
+baseurl: '/writeups'
 
 # The language of the webpage › http://www.lingoes.net/en/translator/langcode.htm
 # If it has the same name as one of the files in folder `_data/locales`, the layout language will also be changed,
@@ -19,36 +19,36 @@ timezone: America/Chicago
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Write-Up Collection                          # the main title
+title: Write-Ups by retr0                          # the main title
 
-tagline:  Write-up and some notes on red team operations and pentesting # it will display as the sub-title
+tagline:  Write-up and some notes on Red Team Operations and Penetration Testing # it will display as the sub-title
 
 description:                        # used by seo meta and the atom feed
   This blog has the purpose of sharing a collection of my write-ups during my cybersecurity journey
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: 'https://don-1ntell0.github.io'
+url: 'https://retr0-1ntell0.github.io'
 
 github:
-  username: DON-1ntell0             # change to your github username
+  username: retr0-1ntell0             # change to your github username
 
 twitter:
-  username: DON1ntell0            # change to your twitter username
+  username: 0xretr0__            # change to your twitter username
 
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: 1ntell0
+  name: retr0
   #email: example@domain.com             # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/DON1ntell0      # change to your twitter homepage
-    - https://github.com/DON-1ntell0       # change to your github homepage
+    - https://twitter.com/0xretr0__     # change to your twitter homepage
+    - https://github.com/retr0-1ntell0       # change to your github homepage
     # Uncomment below to add more social links
-    - https://discordapp.com/users/784763571028099122
-    - https://www.youtube.com/@dedsec5271
-    - https://app.hackthebox.com/profile/435501
-    - https://www.buymeacoffee.com/1ntell0
+    - https://discordapp.com/users/1098316374125854721
+    #- https://www.youtube.com/@dedsec5271
+    - https://app.hackthebox.com/profile/1488047
+    #- https://www.buymeacoffee.com/1ntell0
 
 google_site_verification:               # fill in to your verification string
 
