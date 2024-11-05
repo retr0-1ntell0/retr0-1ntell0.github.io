@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
-icon: fas fa-info-circle
-order: 4
+icon: fas fa-user-graduate
+order: 2
 ---
 
 Here are the certifications I completed. Name masked for security reasons.

@@ -1,7 +1,7 @@
 ---
 # the default layout is 'page'
-icon: fas fa-info-circle
-order: 4
+icon: far fa-user
+order: 1
 ---
 
 ![image description](/Assets/Pictures/1ntell0.png)

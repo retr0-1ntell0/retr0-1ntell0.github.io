@@ -46,9 +46,7 @@ social:
     - https://github.com/retr0-1ntell0       # change to your github homepage
     # Uncomment below to add more social links
     - https://discordapp.com/users/1098316374125854721
-    #- https://www.youtube.com/@dedsec5271
     - https://app.hackthebox.com/profile/1488047
-    #- https://www.buymeacoffee.com/1ntell0
 
 google_site_verification:               # fill in to your verification string
 
@@ -73,7 +71,7 @@ google_analytics:
 #     light  - Use the light color scheme
 #     dark   - Use the dark color scheme
 #
-theme_mode:   dark
+theme_mode:   #dark
 
 # The CDN endpoint for images.
 # Notice that once it is assigned, the CDN url
