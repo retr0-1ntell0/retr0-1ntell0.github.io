@@ -25,3 +25,7 @@ Here are the certifications I completed. Name masked for security reasons.
 ## PNPT (Practical Network Penetration Tester) - Aug 28 2024
 
 ![image description](/Assets/Pictures/PNPT-CERT.png)
+
+## FullHouse - Nov 27 2024
+
+![image description](/Assets/Pictures/FULLHOUSE-CERT.png)
