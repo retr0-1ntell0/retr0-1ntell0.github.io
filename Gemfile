@@ -8,6 +8,12 @@ group :test do
   gem "html-proofer", "~> 3.18"
 end
 
+# added plugins 
+ group :jekyll_plugins do
+   # (other jekyll plugins)
+   gem 'jekyll_picture_tag', '~> 2.0'
+ end
+ 
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
 install_if -> { RUBY_PLATFORM =~ %r!mingw|mswin|java! } do
