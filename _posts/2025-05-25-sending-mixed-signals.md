@@ -2,7 +2,7 @@
 title: Sending Mixed Signals
 date: 2025-05-25 22:10:11 -5000
 categories: [CTF, Nahamcon 2025, OSINT]
-tags: [OSINT]
+tags: [osint]
 toc: true
 comments: false
 ---

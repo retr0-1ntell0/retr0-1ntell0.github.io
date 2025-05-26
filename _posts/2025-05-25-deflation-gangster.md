@@ -2,7 +2,7 @@
 title: Deflation Gangster
 date: 2025-05-25 22:10:11 -5000
 categories: [CTF, Nahamcon 2025, Reverse Engineering]
-tags: [Reverse Engineering]
+tags: [reverse engineering] 
 toc: true
 comments: false
 ---
