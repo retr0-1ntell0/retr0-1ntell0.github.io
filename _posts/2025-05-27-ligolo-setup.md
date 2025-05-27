@@ -30,7 +30,7 @@ Ligolo is a tool that helps when we need to pivot through a network. I really lo
 
 ## Disclaimer
 
-This is only for educational purposes. I am not responsible for any damage that may occur to your network or computer. Use this tool at your own risk even if there is no damage. Make sure to read the documentation of `ligolo-ng`[^2] and this documentation before using those tools. You can find all the links in the [references](#References) section.
+This is only for educational purposes. I am not responsible for any damage that may occur to your network or computer. Use this tool at your own risk even if there is no damage. Make sure to read the documentation of `ligolo-ng`[^2] and this documentation before using those tools. You can find all the links in the [references](#references) section.
   
 ## Requirement
 
