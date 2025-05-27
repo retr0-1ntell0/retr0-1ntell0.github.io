@@ -7,7 +7,7 @@ toc: true
 comments: false
 ---
 
-a## Description
+## Description
 Author: BuildHackSecure @ HackingHub  
   
 HackingHub has provided this CTF challenge!  
