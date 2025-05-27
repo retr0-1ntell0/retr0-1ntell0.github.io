@@ -6,6 +6,7 @@ tags: [penetration testing]
 toc: true
 comments: false
 pin: true
+description: Ligolo Setup is a simple tool that automates the process of setting up the interfaces and routes to speed up your workflow.
 ---
 
 
@@ -29,7 +30,7 @@ Ligolo is a tool that helps when we need to pivot through a network. I really lo
 
 ## Disclaimer
 
-This is only for educational purposes. I am not responsible for any damage that may occur to your network or computer. Use this tool at your own risk even if there is no damage. Make sure to read the documentation of `ligolo-ng`[^2] and this documentation before using those tools. You can find all the links in the [[#References]]
+This is only for educational purposes. I am not responsible for any damage that may occur to your network or computer. Use this tool at your own risk even if there is no damage. Make sure to read the documentation of `ligolo-ng`[^2] and this documentation before using those tools. You can find all the links in the [references](#References) section.
   
 ## Requirement
 
@@ -40,25 +41,30 @@ On `Debian/Ubuntu` based distributions:
 sudo apt update
 sudo apt install iproute2
 ```
+{: .nolineno}
 
 On `Red Hat/CentOS/Fedora-based` distributions:
 ```
 sudo yum install iproute
 ```
+{: .nolineno}
 
 or (on newer versions of `Fedora`):
 ```
 sudo dnf install iproute
 ```
+{: .nolineno}
 
 On `Arch Linux/Endeavor OS/Manjaro`:
 ```
 sudo pacman -S iproute2
 ```
+{: .nolineno}
 or
 ```
 yay -S iproute2
 ```
+{: .nolineno}
 
 ## Usage
 
@@ -68,11 +74,13 @@ The `ligolo-ng` binary releases can be found here [^3]
 ```shell
 chmod +x ligolo-setup.sh
 ```
+{: .nolineno}
 
 Once this step is done we are ready to roll, now just execute it and make a choice:
 ```shell
 ./ligolo-setup.sh
 ```
+{: .nolineno}
 
 Once launched, we are presented with the following screen with options showed in order of execution:
 
