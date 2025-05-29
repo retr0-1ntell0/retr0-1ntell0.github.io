@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, WarmUps]
 tags: [warmups] 
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ### Description
@@ -70,11 +73,14 @@ with open("recovered.zip", "wb") as zip_file:
 print("ZIP file has been recovered as 'recovered.zip'.")
 
 ```
+{: .nolineno }
+
 Once solved, we got our zip:
 ```bash
 > file recovered.zip 
 recovered.zip: Zip archive data, at least v5.1 to extract, compression method=AES Encrypted
 ```
+{: .nolineno }
 
 One could also use `cyberchef`[^2]
 ![accessing-the-chal](Assets/Pictures/CTF/Nahamcon-2025/cyber-chef.png)
@@ -88,11 +94,14 @@ error [recovered.zip]:  attempt to seek before beginning of zipfile
   (please check that you have transferred or created the zipfile in the
   appropriate BINARY mode and that you have compiled UnZip properly)
 ```
+{: .nolineno }
 
 To solve it we ran the following command:
 ```bash
 zip -FF recovered.zip --out fixed.zip
 ```
+{: .nolineno }
+
 This attempts to "fix" a damaged ZIP archive by reassembling any recoverable parts. Then once we have our fixed zip, we could unzip it.
 Using `unzip` we still got yet another error due to version compatibility:
 ```bash
@@ -100,6 +109,8 @@ Using `unzip` we still got yet another error due to version compatibility:
 Archive:  fixed.zip
    skipping: flag.txt                need PK compat. v5.1 (can do v4.6)
 ```
+{: .nolineno }
+
 For this we changed tools to use `7z`
 {% raw %}
 ```bash
@@ -129,6 +140,7 @@ Compressed: 239
 [INFO] [DkImageLoader] 1 containers created in 0 ms                                                          
 [INFO] [DkImageLoader] after sorting:  0 ms
 ```
+{: .nolineno }
 {% endraw %}
 
 We were able to recover the file and unzip the file successfully and read flag.txt file that contained the flag.

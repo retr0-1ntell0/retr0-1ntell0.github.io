@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, OSINT]
 tags: [osint]
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description
@@ -32,6 +35,8 @@ Here is the hard-coded credential in the application used to encrypt log files:
 ```text
 enRR8UVVywXYbFkqU#QDPRkO
 ```
+{: .nolineno }
+
 
 ### Part 2
 
@@ -44,12 +49,16 @@ Then we had to clone the repo in order to see who did what:
 ```bash
 git clone https://github.com/micahflee/TM-SGNL-Android
 ```
+{: .nolineno }
+
 So we needed the commit hash in order to disclose that info, we got it the website here[^3] as shown below:
 ![commit-hash.png](Assets/Pictures/CTF/Nahamcon-2025/commit-hash.png)
 Then we can run the following command, since we have a huge repository we need to specify the string in which we want to search for:
 ```bash
 git log -S "enRR8UVVywXYbFkqU#QDPRkO"
 ```
+{: .nolineno }
+
 Here is what we got:
 ![commit-hash](Assets/Pictures/CTF/Nahamcon-2025/mail-discovered.png)
 
@@ -57,6 +66,8 @@ We found the correct email:
 ```text
 moti@telemessage.com
 ```
+{: .nolineno }
+
 
 ### Part 3
 
@@ -67,6 +78,8 @@ We ran:
 ```bash
 git log -S "enRR8UVVywXYbFkqU#QDPRkO" --oneline
 ```
+{: .nolineno }
+
 And got:
 ![release](Assets/Pictures/CTF/Nahamcon-2025/release.png)
 Adding this we got the last answer correct:

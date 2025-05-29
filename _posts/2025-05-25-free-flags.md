@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, WarmUps]
 tags: [warmups]
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description
@@ -22,6 +25,8 @@ So we downloaded the `free_flags.txt` file and it's a huge file of flags as it c
 > wc -l free_flags.txt 
 500 free_flags.txt
 ```
+{: .nolineno }
+
 From here we went back to the following page[^1] to look at the flag format as shown below:
 ![accessing-the-chal](Assets/Pictures/CTF/Nahamcon-2025/rules.png)
 So we got the following format of flag => `flag\{[0-9a-f]{32}\}`
@@ -60,6 +65,7 @@ Running it, disclosed the flag:
 Valid flags found:
 flag{REDACTED}
 ```
+{: .nolineno }
 
 
 > Flag

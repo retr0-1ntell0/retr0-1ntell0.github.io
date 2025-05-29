@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, OSINT]
 tags: [osint]
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description
@@ -23,17 +26,22 @@ First thing we do when we get a file with a weird extension, we enumerate the fo
 > file network-log.cef
 network-log.cef: ASCII text
 ```
+{: .nolineno }
+
 So we can read the file just as we would read any text.
 We looked to see how many lines we got, and the magic `500` lines appeared again:
 ```bash
 > wc -l network-log.cef 
 500 network-log.cef
 ```
+{: .nolineno }
+
 Clearly we will need a script in order to go through the file and get the needed `eventHash`.
 We tried retrieving the uniq `eventHash`, but we got too many candidates as all the hash weere unique duhh :
 ```bash
 grep -o 'eventHash=[a-f0-9]*' network-log.cef | awk -F'=' '{print $2}' | sort | uniq > uniq-eventHash
 ```
+{: .nolineno }
 
 Let's actually look into the data and understand to see maybe we can filter something and look for anomalies.
 Here is the filter we ran after looking at the data for a good while.
@@ -42,6 +50,8 @@ We ran:
 ```bash
 grep 'threatType' network-log.cef | grep 'act=allowed'
 ```
+{: .nolineno }
+
 Here is the result:
 ![threat-type](Assets/Pictures/CTF/Nahamcon-2025/threat-type.png)
 
@@ -49,6 +59,8 @@ We still had a lot of content, with different threat type. Then later on we adde
 ```bash
 grep 'threatType' network-log.cef | grep 'act=allowed' | grep 'trojan'
 ```
+{: .nolineno }
+
 We got two results, thankfully we were not limited to with trials, so we got:
 ![possible-flags](Assets/Pictures/CTF/Nahamcon-2025/possible-flags.png)
 With these two we tried our luck and luckily we got it on the second attempt, the solution was the following:
@@ -56,6 +68,7 @@ With these two we tried our luck and luckily we got it on the second attempt, th
 eventHash=5b16c7044a22ed3845a0ff408da8afa9
 fileName=chemistry_notes.pdf
 ```
+{: .nolineno }
 
 So the result was:
 > Flag

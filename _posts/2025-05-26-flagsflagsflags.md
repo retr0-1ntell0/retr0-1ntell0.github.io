@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, Reverse Engineering]
 tags: [reverse engineering]
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description
@@ -22,9 +25,10 @@ Did you see the strings? One of those is right, I can just feel it.
 
 First we downloaded the `flagsflagsflags` binary. Then we did some static analysis:
 ```bash
-file flagsflagsflags                  
+> file flagsflagsflags                  
 flagsflagsflags: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, no section header
 ```
+{: .nolineno }
 The binary was packed so we could not decompile it properly as shown here we can see the `upx` info and even header at the beginning of running `strings flagsflagsflags`
 ![packaged](Assets/Pictures/CTF/Nahamcon-2025/packaged.png)
 
@@ -33,25 +37,28 @@ More info to confirm shown below:
 
 We unpacked it first:
 ```bash
-upx -d flagsflagsflags 
+> upx -d flagsflagsflags 
 ```
+{: .nolineno }
 Then we can do more enumeration on it, as even the file command displays more data:
 ```bash
-file flagsflagsflags                                        
+> file flagsflagsflags                                        
 flagsflagsflags: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, BuildID[sha1]=8bbcb5450afeba98d27154e01464d3e4888218b7, stripped
 ```
+{: .nolineno }
 We then can see more interesting strings and we noticed we could grep the flags:
 ![flags-in-binary](Assets/Pictures/CTF/Nahamcon-2025/flags-in-binary.png)
 
 We then stored all the strings matching `flag{*}` inside a file called `string-flags.txt`
 using the following command to count the number of lines we got in the binary:
 ```bash
-strings ./unpacked-flagsflagsflags | grep -o 'flag{[^}]*}' | wc -l
+> strings ./unpacked-flagsflagsflags | grep -o 'flag{[^}]*}' | wc -l
 100000
 ```
+{: .nolineno }
 We needed it stored in a file, so we did the following:
 ```bash
-strings ./unpacked-flagsflagsflags | grep -o 'flag{[^}]*}' > string-flags.txt  # storing the flags
+> strings ./unpacked-flagsflagsflags | grep -o 'flag{[^}]*}' > string-flags.txt  # storing the flags
 wc -l string-flags.txt       # counting the lines
 ```
 Here we verify that we got all the flags stored:
@@ -120,6 +127,8 @@ def main():
 if __name__ == "__main__":  
     main()
 ```
+{: .nolineno }
+
 Running our script disclosed the flag as shown below.
 
 Solution:

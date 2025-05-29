@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, Web]
 tags: [web]
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description

@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, OSINT]
 tags: [osint]
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description
@@ -24,6 +27,8 @@ After unzipping the downloaded file with the given password of `nahamcon-2025-ct
 ```bash
 7z e ctf_challenge_files.7z
 ```
+{: .nolineno }
+
 We started gathering the metadata of the file. Turns out they are all windows PE32 executable as shown below:
 ![metadata](Assets/Pictures/CTF/Nahamcon-2025/files-metadata.png)
 Then we look deeper into the metadata using `exiftool`
@@ -31,10 +36,14 @@ We discovered the following line containing the order in which we compile the fi
 ```bash
 PDB File Name                   : xxxxxxxxxxx.pdb
 ```
+{: .nolineno }
+
 So we did run the following command to filter the `PDB File Name` and the name of the file in order to get the order of execution:
 ```bash
 > ls -l *.exe && exiftool * | grep 'PDB File Name'
 ```
+{: .nolineno }
+
 Here is what the ouput looks like:
 ![execution-order](Assets/Pictures/CTF/Nahamcon-2025/filtering.png)
 

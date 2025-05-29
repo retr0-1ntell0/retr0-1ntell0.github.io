@@ -37,31 +37,31 @@ This is only for educational purposes. I am not responsible for any damage that 
 The only requirement so far is to have root access or password to be able to make it work. If you are having issues running the commands you are probably missing `iproute` or `iproute2`, `awk`, `grep`, `xargs` and `nl` packages depending on your OS. Of course, you need to have `ligolo-ng` installed and renaming the name of the binary to `ligolo-proxy` in your executable environment variable `PATH`.
 
 On `Debian/Ubuntu` based distributions:
-```
+```bash
 sudo apt update
 sudo apt install iproute2
 ```
 {: .nolineno}
 
 On `Red Hat/CentOS/Fedora-based` distributions:
-```
+```bash
 sudo yum install iproute
 ```
 {: .nolineno}
 
 or (on newer versions of `Fedora`):
-```
+```bash
 sudo dnf install iproute
 ```
 {: .nolineno}
 
 On `Arch Linux/Endeavor OS/Manjaro`:
-```
+```bash
 sudo pacman -S iproute2
 ```
 {: .nolineno}
 or
-```
+```bash
 yay -S iproute2
 ```
 {: .nolineno}
@@ -98,7 +98,69 @@ Here are little helpers and what they do:
 - `[c/C]` : Whenever the screen becomes messy, we can use this just to clear the screen, nothing fancy. A regular `CTRL+L` or `clear` command.
 - `[q/Q]` : Best way to quit this tool as it does the clean up process of the certificate directories added by `ligolo-ng`.
 
+Here are some examples of the usage of this tool:
 
+### Adding a new interface
+Here we will add a new `tuntap` interface that will be our `ligolo` interface.
+
+![interface1](Assets/Pictures/ligolo-setup/interface1.png){:width="500px"}
+
+> **Note**
+>
+> Since this is an operation only reserved for the `root` user, we need to run the command as `sudo` in order to get the privileges.
+> Hence why we need to provide the password for the `root` user.
+{: .prompt-tip }
+
+Here is an example of adding another `tuntap` interface we called `ligolo2`:
+
+![interface2](Assets/Pictures/ligolo-setup/interface2.png){:width="500px"}
+
+### Adding a new route
+Here we will add a new route to the `tuntap` interface we created earlier.
+
+![route-add](Assets/Pictures/ligolo-setup/route-add.png){:width="500px"}
+
+In `(1)` we can see that the route will only accepts IPv4 addresses in CIDR format or else it will not be added.
+In `(2)` we can see the new route that was added using th CIDR format. also displaying the newly added route in the `ifconfig` command befoe the options.
+
+### Interface details
+Here we are getting information about our `tuntap` interface. running the command `ifconfig ligolo`.
+
+![ifconfig](Assets/Pictures/ligolo-setup/ifconfig.png){:width="500px"}
+
+Here are the details when we got multiple interfaces:
+
+![ifconfig-multiple](Assets/Pictures/ligolo-setup/ifconfig-multiple.png){:width="500px"}
+
+### Deleting an interface
+Here is how we can delete an interface we do not need anymore.
+
+![ifconfig-delete](Assets/Pictures/ligolo-setup/ifconfig-delete.png){:width="500px"}
+
+
+> **Note**
+>
+> At this moment, the delete functionality deletes all the tuntap interfaces created by the tool. I assumed that this operation is needed when we want to delete the `tuntap` interface that we created earlier and either start fresh or close the program once we are done with it. Might change or update it if needed. But for now, it works.
+{: .prompt-warning }
+
+## Starting the ligolo-ng proxy
+Now that we have our `tuntap` interface set up, we can start the proxy using the option `[5]`.
+
+![start-proxy](Assets/Pictures/ligolo-setup/start-proxy.png){:width="500px"}
+
+
+### Quitting & Clean up 
+Once done using the proxy, we can quit the ligolo-ng interface by pressing `CTRT+C` twice in order to get back to the ligolo-setup menu as shown below:
+
+![quit](Assets/Pictures/ligolo-setup/quit.png){:width="500px"}
+
+Once on the menu, we can now quit the tool by pressing `q` or `Q` as shown below. This step is not mandatory but it is good practice to quit the tool once we are done with it and delete the self-signed certificate directory.
+
+![quit-2](Assets/Pictures/ligolo-setup/quit-2.png){:width="500px"}
+
+
+That's it for now, I hope you enjoyed this little tool. 
+Happy hacking ! 😊
 
 
 ## References

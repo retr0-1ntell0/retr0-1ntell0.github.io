@@ -5,6 +5,9 @@ categories: [CTF, Nahamcon 2025, Reverse Engineering]
 tags: [reverse engineering] 
 toc: true
 comments: false
+image:
+  path: Assets/Pictures/CTF/Nahamcon-2025/logo/mod-logo.webp
+  lqip: data:image/webp
 ---
 
 ## Description
@@ -20,6 +23,7 @@ First let's analyse the file and look for strings:
 > file whats-a-base 
 whats-a-base: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=484060c717cdff4f3fd09b358136996ec7b7feaa, for GNU/Linux 3.2.0, stripped
 ```
+{: .nolineno }
 Here are some of the strings in the binary:
 ```bash
 > strings whats-a-base | head -n 50
@@ -67,6 +71,8 @@ getauxval
 malloc
 __libc_start_main
 ```
+{: .nolineno }
+
 Now let's execute and see what we need to do :
 ![inputs](Assets/Pictures/CTF/Nahamcon-2025/inputs.png)
 
@@ -79,10 +85,13 @@ We took that first string:
 ```text
 src/main.rsm7xzr7muqtxsr3m8pfzf6h5ep738ez5ncftss7d1cftskz49qj4zg7n9cizgez5upbzzr7n9cjosg45wqjosg3mu
 ```
+{: .nolineno }
 Extracted the following string, right after the `src/main.rs` string, we now have the following string:
 ```text
 m7xzr7muqtxsr3m8pfzf6h5ep738ez5ncftss7d1cftskz49qj4zg7n9cizgez5upbzzr7n9cjosg45wqjosg3mu
 ```
+{: .nolineno }
+
 Trying it on the binary still gave us the same error. But it shows at least that it's part of the code since we found it in the strings and should be input as the password but just not the exact string.
 Then we started looking for ways to decrypt it.
 So went back to the strings and found the following string:
@@ -93,6 +102,7 @@ In plain text it was:
 ```text
 __rust_begin_short_backtrace__rust_end_short_backtraces
 ```
+{: .nolineno }
 Running the following against the binary we got the flag and solved the challenge:
 ![flag](Assets/Pictures/CTF/Nahamcon-2025/flag-revs.png)
 
