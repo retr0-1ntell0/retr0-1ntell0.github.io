@@ -26,7 +26,7 @@ description: Ligolo Setup is a simple tool that automates the process of setting
 
 ## Description
 
->Ligolo is a tool that helps when we need to pivot through a network. I really love this tool as it makes a lot of things easier. But the part I dislike the most is that the set up is not automated. Which is understandable due to all the work that needs to be done to set up the tool. That's why to help myself skip the trouble of setting up the interface and adding the route every time I need to use it I decided to write a tool, I called `ligolo-setup`[^1] that will help me automate the process of setting up the interfaces and routes to speed up my workflow.  
+> *Ligolo is a tool that helps when we need to pivot through a network. I really love this tool as it makes a lot of things easier. But the part I dislike the most is that the set up is not automated. Which is understandable due to all the work that needs to be done to set up the tool. That's why to help myself skip the trouble of setting up the interface and adding the route every time I need to use it I decided to write a tool, I called `ligolo-setup`[^1] that will help me automate the process of setting up the interfaces and routes to speed up my workflow.*  
 {: .prompt-warning }
 
 ## Disclaimer
