@@ -29,3 +29,15 @@ Here are the certifications I completed. Name masked for security reasons.
 ## FullHouse - Nov 27 2024
 
 ![image description](/Assets/Pictures/FULLHOUSE-CERT.png)
+
+## Wanderer - Sept 3 2025
+
+![image description](/Assets/Pictures/wanderer-CERT.png)
+
+## Certified in CyberSecurity - Dec 10 2025
+
+![image description](/Assets/Pictures/cc-cert.png)
+
+## Alchemy - Jan 22 2026
+
+![image description](/Assets/Pictures/alchemy-CERT.png)
