@@ -278,7 +278,7 @@ This is the fun part. Instead of having scripts, why not make functions in our `
 I have free will so I did the following.
 
 #### Helps create a new folder for Machines
-This function here uses an alias we have called `hax` that will help not only create the new folder but also add all the necessary folder you will need for documentation as mentioned earlier in the [aliases](######directories). 
+This function here uses an alias we have called `hax` that will help not only create the new folder but also add all the necessary folder you will need for documentation as mentioned earlier in the [aliases](#directories). 
 
 
 ```bash
