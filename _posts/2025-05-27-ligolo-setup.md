@@ -85,7 +85,7 @@ Once this step is done we are ready to roll, now just execute it and make a choi
 
 Once launched, we are presented with the following screen with options showed in order of execution:
 
-![homepage](Assets/Pictures/ligolo-setup/home-page.png){:width="500px"}
+![homepage](/Assets/Pictures/ligolo-setup/home-page.png){:width="500px"}
 
 From let's walk through all the different options:
 - `[1]` : This options automates the process of adding a new `tuntap` device before using `ligolo-ng`. This created `tuntap` device is the device that would be used by `ligolo-ng` for tunneling. This reduces the stress of typing that command every time we need to add a new device.
@@ -104,7 +104,7 @@ Here are some examples of the usage of this tool:
 ### Adding a new interface
 Here we will add a new `tuntap` interface that will be our `ligolo` interface.
 
-![interface1](Assets/Pictures/ligolo-setup/interface1.png){:width="500px"}
+![interface1](/Assets/Pictures/ligolo-setup/interface1.png){:width="500px"}
 
 > **Note**
 >
@@ -114,12 +114,12 @@ Here we will add a new `tuntap` interface that will be our `ligolo` interface.
 
 Here is an example of adding another `tuntap` interface we called `ligolo2`:
 
-![interface2](Assets/Pictures/ligolo-setup/interface2.png){:width="500px"}
+![interface2](/Assets/Pictures/ligolo-setup/interface2.png){:width="500px"}
 
 ### Adding a new route
 Here we will add a new route to the `tuntap` interface we created earlier.
 
-![route-add](Assets/Pictures/ligolo-setup/route-add.png){:width="500px"}
+![route-add](/Assets/Pictures/ligolo-setup/route-add.png){:width="500px"}
 
 In `(1)` we can see that the route will only accepts IPv4 addresses in CIDR format or else it will not be added.
 In `(2)` we can see the new route that was added using th CIDR format. also displaying the newly added route in the `ifconfig` command befoe the options.
@@ -127,16 +127,16 @@ In `(2)` we can see the new route that was added using th CIDR format. also disp
 ### Interface details
 Here we are getting information about our `tuntap` interface. running the command `ifconfig ligolo`.
 
-![ifconfig](Assets/Pictures/ligolo-setup/ifconfig.png){:width="500px"}
+![ifconfig](/Assets/Pictures/ligolo-setup/ifconfig.png){:width="500px"}
 
 Here are the details when we got multiple interfaces:
 
-![ifconfig-multiple](Assets/Pictures/ligolo-setup/ifconfig-multiple.png){:width="500px"}
+![ifconfig-multiple](/Assets/Pictures/ligolo-setup/ifconfig-multiple.png){:width="500px"}
 
 ### Deleting an interface
 Here is how we can delete an interface we do not need anymore.
 
-![ifconfig-delete](Assets/Pictures/ligolo-setup/ifconfig-delete.png){:width="500px"}
+![ifconfig-delete](/Assets/Pictures/ligolo-setup/ifconfig-delete.png){:width="500px"}
 
 
 > **Note**
@@ -147,17 +147,17 @@ Here is how we can delete an interface we do not need anymore.
 ## Starting the ligolo-ng proxy
 Now that we have our `tuntap` interface set up, we can start the proxy using the option `[5]`.
 
-![start-proxy](Assets/Pictures/ligolo-setup/start-proxy.png){:width="500px"}
+![start-proxy](/Assets/Pictures/ligolo-setup/start-proxy.png){:width="500px"}
 
 
 ### Quitting & Clean up 
 Once done using the proxy, we can quit the ligolo-ng interface by pressing `CTRT+C` twice in order to get back to the ligolo-setup menu as shown below:
 
-![quit](Assets/Pictures/ligolo-setup/quit.png){:width="500px"}
+![quit](/Assets/Pictures/ligolo-setup/quit.png){:width="500px"}
 
 Once on the menu, we can now quit the tool by pressing `q` or `Q` as shown below. This step is not mandatory but it is good practice to quit the tool once we are done with it and delete the self-signed certificate directory.
 
-![quit-2](Assets/Pictures/ligolo-setup/quit-2.png){:width="500px"}
+![quit-2](/Assets/Pictures/ligolo-setup/quit-2.png){:width="500px"}
 
 
 That's it for now, I hope you enjoyed this little tool. 
