@@ -23,6 +23,9 @@ Here are the certifications I completed over the years.
 
 # **Hack The Box – Pro Labs**
 
+### **RastaLabs** - *March 04 2026*
+![image description](/Assets/Pictures/rastalabs-CERT.png)
+
 ### **Alchemy** — *Jan 22 2026*
 ![image description](/Assets/Pictures/alchemy-CERT.png)
 
