@@ -23,6 +23,15 @@ Here are the certifications I completed over the years.
 
 # **Hack The Box – Pro Labs**
 
+### **Tea** - *March 16 2026*
+![image description](/Assets/Pictures/TEA-CERT.png)
+
+### **Reflection** - *March 14 2026*
+![image description](/Assets/Pictures/REFLECTION-CERT.png)
+
+### **Klendathu** - *March 14 2026*
+![image description](/Assets/Pictures/KLENDATHU-CERT.png)
+
 ### **Trusted** - *March 12 2026*
 ![image description](/Assets/Pictures/TRUSTED-CERT.png)
 
