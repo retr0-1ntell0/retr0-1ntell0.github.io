@@ -23,6 +23,9 @@ Here are the certifications I completed over the years.
 
 # **Hack The Box – Pro Labs**
 
+### **Intercept** - *March 17 2026*
+![image description](/Assets/Pictures/INTERCEPT-CERT.png)
+
 ### **Tea** - *March 16 2026*
 ![image description](/Assets/Pictures/TEA-CERT.png)
 
